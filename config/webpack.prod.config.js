@@ -10,5 +10,9 @@ module.exports = merge(common, {
     // contenthash : will generate hash md5 based on the content file
     filename: "main.[contenthash].js",
     path: path.resolve(__dirname, "../public"),
+    // clean build destination folder before each build
+    // ref : https://webpack.js.org/guides/output-management/#cleaning-up-the-dist-folder
+    // so there's no need to use clean-webpack-plugin
+    clean: true,
   },
 });

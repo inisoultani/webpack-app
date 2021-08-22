@@ -8,4 +8,4 @@ const alertService = new AlertService();
 const componentService = new ComponentService();
 
 run(alertService, componentService);
-console.log("application run");
+console.log("application run", __webpack_public_path__);

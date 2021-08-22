@@ -15,7 +15,7 @@ module.exports = merge(common, {
   },
   output: {
     // development mode dont need the contenthash
-    filename: "main.js",
+    filename: "[name].bundle.js",
     path: path.resolve(__dirname, "../dist"),
   },
 });

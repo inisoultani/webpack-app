@@ -1,13 +1,22 @@
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: "development",
   devtool: "source-map",
   entry: "./src/index.js",
   output: {
-    filename: "main.js",
+    // to avoid cache mechanism in client browser, so we need to generate unique file
+    // so that the browser will always treat it as new file instead existing cached file
+    // contenthash : will generate hash md5 based on the content file
+    filename: "main.[contenthash].js",
     path: path.resolve(__dirname, "../dist"),
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./src/template.html",
+    }),
+  ],
   module: {
     rules: [
       {

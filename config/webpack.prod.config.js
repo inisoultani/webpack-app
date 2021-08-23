@@ -1,16 +1,16 @@
-const path = require("path");
-const { merge } = require("webpack-merge");
-const common = require("./webpack.common.config");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require('path');
+const { merge } = require('webpack-merge');
+const common = require('./webpack.common.config');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = merge(common, {
-  mode: "production",
+  mode: 'production',
   output: {
     // to avoid cache mechanism in client browser, so we need to generate unique file
     // so that the browser will always treat it as new file instead existing cached file
     // contenthash : will generate hash md5 based on the content file
-    filename: "[name].[contenthash].bundle.js",
-    path: path.resolve(__dirname, "../dist"),
+    filename: '[name].[contenthash].bundle.js',
+    path: path.resolve(__dirname, '../dist'),
     // clean build destination folder before each build
     // ref : https://webpack.js.org/guides/output-management/#cleaning-up-the-dist-folder
     // so there's no need to use clean-webpack-plugin
@@ -18,7 +18,7 @@ module.exports = merge(common, {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "[name].[contenthash].css",
+      filename: '[name].[contenthash].css',
     }),
   ],
   module: {
@@ -30,8 +30,18 @@ module.exports = merge(common, {
         // then style-loader will generate separated css file
         use: [
           MiniCssExtractPlugin.loader, // 3. generate separated css file
-          "css-loader", // 2. turn css into commonJS
-          "sass-loader", // 1. turn scss into css
+          'css-loader', // 2. turn css into commonJS
+          'sass-loader', // 1. turn scss into css
+        ],
+      },
+      {
+        test: /\.css$/,
+        // the order of the array is IMPORTANT, it loads BACKWARDS
+        // so we need to make sure that css-loader (generate css in webpack)
+        // then style-loader will generate separated css file
+        use: [
+          MiniCssExtractPlugin.loader, // 3. generate separated css file
+          'css-loader', // 2. turn css into commonJS
         ],
       },
     ],

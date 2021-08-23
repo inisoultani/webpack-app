@@ -1,29 +1,38 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  devtool: "source-map",
+  devtool: 'source-map',
   entry: {
-    main: "./src/index.js",
-    vendor: "./src/vendor.js",
+    main: './src/index.js',
+    vendor: './src/vendor.js',
+    react: './src/react.js',
   },
   plugins: [
     // plugin that help us generate the html
     new HtmlWebpackPlugin({
-      template: "./src/template.html",
+      template: './src/template.html',
     }),
   ],
   module: {
     rules: [
       {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node-modules/,
+        options: {
+          presets: ['@babel/preset-env', '@babel/preset-react'],
+        },
+      },
+      {
         test: /\.html$/,
-        loader: "html-loader",
+        loader: 'html-loader',
       },
       {
         test: /\.(svg|jpe?g|png|gif)$/,
-        type: "asset/resource",
+        type: 'asset/resource',
         generator: {
-          filename: "imgs/[name].[hash][ext]",
+          filename: 'imgs/[name].[hash][ext]',
         },
       },
       // we dont need separated file-loader for img

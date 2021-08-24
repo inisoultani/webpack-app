@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import webpackBlackAndWhite from '../assets/webpack-icon-logo-black-and-white.png';
 // import TextInput from './TextInput';
 
 const TextInput = React.lazy(() => {
@@ -31,4 +32,17 @@ const AppStyled = styled.div`
   display: flex;
   align-items: center;
   column-gap: 20px;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 100%;
+    background-color: #8ed6fb;
+    background-image: url(${webpackBlackAndWhite});
+    background-size: 50px;
+  }
 `;

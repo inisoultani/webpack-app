@@ -1,12 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
-import TextInput from './TextInput';
+// import TextInput from './TextInput';
+
+const TextInput = React.lazy(() => {
+  // test simulate delay
+  return Promise.all([
+    import('./TextInput'),
+    new Promise((resolve, reject) => setTimeout(resolve, 300)),
+  ]).then((results) => results[0]);
+});
 
 const App = () => {
   return (
     <AppStyled>
       <label>This is React App</label>
-      <TextInput />
+      <React.Suspense fallback="Loading..">
+        <TextInput />
+      </React.Suspense>
     </AppStyled>
   );
 };

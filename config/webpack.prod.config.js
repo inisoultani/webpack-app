@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = merge(common, {
   mode: 'production',
+  // target: 'node',
   output: {
     // to avoid cache mechanism in client browser, so we need to generate unique file
     // so that the browser will always treat it as new file instead existing cached file
@@ -24,7 +25,7 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
-        test: /\.scss$/,
+        test: /\.s?css$/,
         // the order of the array is IMPORTANT, it loads BACKWARDS
         // so we need to make sure that css-loader (generate css in webpack)
         // then style-loader will generate separated css file
@@ -32,16 +33,6 @@ module.exports = merge(common, {
           MiniCssExtractPlugin.loader, // 3. generate separated css file
           'css-loader', // 2. turn css into commonJS
           'sass-loader', // 1. turn scss into css
-        ],
-      },
-      {
-        test: /\.css$/,
-        // the order of the array is IMPORTANT, it loads BACKWARDS
-        // so we need to make sure that css-loader (generate css in webpack)
-        // then style-loader will generate separated css file
-        use: [
-          MiniCssExtractPlugin.loader, // 3. generate separated css file
-          'css-loader', // 2. turn css into commonJS
         ],
       },
     ],

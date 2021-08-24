@@ -1,8 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import TextInput from './TextInput';
 
 const App = () => {
-  return <AppStyled>This is React App</AppStyled>;
+  return (
+    <AppStyled>
+      <label>This is React App</label>
+      <TextInput />
+    </AppStyled>
+  );
 };
 
 export default App;
@@ -12,4 +18,7 @@ const AppStyled = styled.div`
   color: white;
   margin: 10px 0;
   padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
 `;
